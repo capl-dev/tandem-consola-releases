@@ -40,10 +40,12 @@ Si prefieres usar una API key de Anthropic en lugar de la suscripción, cámbial
 Los instaladores todavía no están firmados digitalmente, así que el sistema puede advertirte la primera vez:
 
 - **Windows**: si aparece «Windows protegió su PC», pulsa **Más información → Ejecutar de todas formas**. En equipos con *Smart App Control* activado puede bloquearse por completo.
-- **macOS**: abre el `.dmg` y arrastra Tándem a Aplicaciones. Si dice que no se puede abrir, haz clic derecho sobre la app → **Abrir**, o ejecuta en la terminal:
-  ```bash
-  xattr -dr com.apple.quarantine /Applications/Tandem.app
-  ```
+- **macOS**: abre el `.dmg` y arrastra Tándem a **Aplicaciones**. La primera vez que lo abras, macOS dirá que no puede verificar al desarrollador:
+  1. Pulsa **Aceptar** (o **Listo**).
+  2. Ve a **Ajustes del Sistema → Privacidad y seguridad** y, abajo, pulsa **Abrir igualmente** junto al aviso de Tándem.
+  3. Confirma con tu contraseña. Desde ahí abre normal.
+
+  Alternativa por terminal: `xattr -dr com.apple.quarantine /Applications/Tandem.app`
 - **Linux**: `sudo apt install ./Tandem_*.deb` o `sudo dnf install ./Tandem_*.rpm`. Para el AppImage: `chmod +x Tandem_*.AppImage && ./Tandem_*.AppImage`.
 
 Tándem guarda su configuración en `~/.tandem`.
