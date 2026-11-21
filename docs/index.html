@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tándem · Guía de usuario</title>
+<meta name="description" content="Guía de usuario de Tándem, consola de escritorio para trabajar con IA (Claude Code y Codex) sobre tus proyectos." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f6f5f1; --bg2: #ecebe5; --card: #ffffff; --fg: #1d2129; --muted: #5d6472; --line: #d9d7cf;
+    --accent: #2f6fd0; --accent-ink: #fff; --ok: #2f8a46; --warn: #b26b00; --code: #eceae3;
+    --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace; --sans: "IBM Plex Sans", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12151b; --bg2: #181c24; --card: #1b2029; --fg: #e3e6ec; --muted: #9aa3b2; --line: #2c3340;
+      --accent: #7aa2ff; --accent-ink: #0d1220; --ok: #7ccf8a; --warn: #e3a74f; --code: #222834;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #12151b; --bg2: #181c24; --card: #1b2029; --fg: #e3e6ec; --muted: #9aa3b2; --line: #2c3340;
+    --accent: #7aa2ff; --accent-ink: #0d1220; --ok: #7ccf8a; --warn: #e3a74f; --code: #222834;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.65 var(--sans); }
+  a { color: var(--accent); }
+  code, kbd { font-family: var(--mono); font-size: .88em; background: var(--code); padding: .1em .38em; border-radius: 5px; }
+  kbd { border: 1px solid var(--line); border-bottom-width: 2px; }
+  header.top { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .bar { max-width: 1180px; margin: 0 auto; padding: 10px 16px; display: flex; align-items: center; gap: 14px; }
+  .logo { font: 600 18px var(--mono); letter-spacing: .14em; color: var(--accent); text-decoration: none; }
+  .bar .grow { flex: 1; }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .seg button { border: 0; background: none; color: var(--muted); font: 500 13px var(--sans); padding: 5px 11px; cursor: pointer; }
+  .seg button.on { background: var(--accent); color: var(--accent-ink); }
+  .dl { background: var(--accent); color: var(--accent-ink); text-decoration: none; padding: 6px 13px; border-radius: 8px; font-weight: 600; font-size: 14px; white-space: nowrap; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 40px; }
+  nav.toc { position: sticky; top: 64px; align-self: start; max-height: calc(100vh - 80px); overflow: auto; padding: 28px 0; font-size: 14px; }
+  nav.toc a { display: block; color: var(--muted); text-decoration: none; padding: 4px 0 4px 10px; border-left: 2px solid transparent; }
+  nav.toc a:hover { color: var(--fg); border-left-color: var(--line); }
+  main { padding: 28px 0 60px; min-width: 0; }
+  .hero { padding: 26px 0 10px; }
+  .hero h1 { font: 600 clamp(34px, 6vw, 54px)/1.05 var(--mono); letter-spacing: .08em; margin: 0 0 12px; color: var(--accent); }
+  .hero p.lead { font-size: 19px; max-width: 760px; margin: 0 0 18px; }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 8px; padding: 0; list-style: none; }
+  .pills li { border: 1px solid var(--line); border-radius: 999px; padding: 3px 11px; font-size: 13px; color: var(--muted); background: var(--card); }
+  section { padding: 26px 0 6px; border-top: 1px solid var(--line); margin-top: 26px; }
+  section:first-of-type { border-top: 0; }
+  h2 { font-size: 26px; margin: 0 0 10px; }
+  h3 { font-size: 18px; margin: 22px 0 6px; }
+  p, li { max-width: 780px; }
+  figure { margin: 18px 0 8px; }
+  figure img { width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--line); box-shadow: 0 10px 30px -18px rgba(0,0,0,.45); display: block; background: var(--card); }
+  figure.narrow img { max-width: 380px; }
+  figcaption { color: var(--muted); font-size: 14px; margin-top: 8px; }
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 14px 0; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .card b { display: block; margin-bottom: 4px; }
+  .card p { margin: 0; color: var(--muted); font-size: 14.5px; }
+  table { border-collapse: collapse; width: 100%; max-width: 780px; margin: 10px 0; font-size: 15px; }
+  th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; }
+  .note { border-left: 3px solid var(--accent); background: var(--card); padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 14px 0; max-width: 780px; }
+  .note.warn { border-left-color: var(--warn); }
+  footer.sign { border-top: 1px solid var(--line); padding: 22px 16px 34px; text-align: center; color: var(--muted); font-size: 14px; }
+  footer.sign b { color: var(--fg); }
+  [data-l] { display: none; }
+  html[lang="es"] [data-l="es"], html[lang="en"] [data-l="en"] { display: revert; }
+  @media (max-width: 860px) {
+    .wrap { grid-template-columns: 1fr; gap: 0; }
+    nav.toc { display: none; }
+    .bar .hide-sm { display: none; }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="bar">
+    <a class="logo" href="#">TÁNDEM</a>
+    <span class="grow"></span>
+    <div class="seg" role="group" aria-label="Idioma / Language">
+      <button id="b-es" onclick="setLang('es')">ES</button>
+      <button id="b-en" onclick="setLang('en')">EN</button>
+    </div>
+    <div class="seg hide-sm" role="group" aria-label="Tema / Theme">
+      <button id="t-light" onclick="setTheme('light')">☀</button>
+      <button id="t-dark" onclick="setTheme('dark')">☾</button>
+    </div>
+    <a class="dl" href="https://github.com/capl-dev/tandem-consola-releases/releases"><span data-l="es">Descargar</span><span data-l="en">Download</span></a>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="toc">
+    <div data-l="es">
+      <a href="#que-es">Qué es Tándem</a>
+      <a href="#instalar">Instalación</a>
+      <a href="#asistente">Primer inicio</a>
+      <a href="#proyectos">Proyectos y sesiones</a>
+      <a href="#motores">Motores: Claude Code y Codex</a>
+      <a href="#respaldo">Respaldo automático</a>
+      <a href="#modos">Modos de permisos</a>
+      <a href="#comandos">Comandos con /</a>
+      <a href="#archivos">Archivos y diffs</a>
+      <a href="#git">Git y pull requests</a>
+      <a href="#subagentes">Subagentes</a>
+      <a href="#notas">Notas y skills</a>
+      <a href="#rendimiento">Tokens y rendimiento</a>
+      <a href="#atajos">Atajos de teclado</a>
+      <a href="#ajustes">Ajustes, idioma y temas</a>
+      <a href="#privacidad">Privacidad</a>
+    </div>
+    <div data-l="en">
+      <a href="#en-que-es">What is Tándem</a>
+      <a href="#en-instalar">Installation</a>
+      <a href="#en-asistente">First launch</a>
+      <a href="#en-proyectos">Projects and sessions</a>
+      <a href="#en-motores">Engines: Claude Code and Codex</a>
+      <a href="#en-respaldo">Automatic fallback</a>
+      <a href="#en-modos">Permission modes</a>
+      <a href="#en-comandos">Slash commands</a>
+      <a href="#en-archivos">Files and diffs</a>
+      <a href="#en-git">Git and pull requests</a>
+      <a href="#en-subagentes">Subagents</a>
+      <a href="#en-notas">Notes and skills</a>
+      <a href="#en-rendimiento">Tokens and performance</a>
+      <a href="#en-atajos">Keyboard shortcuts</a>
+      <a href="#en-ajustes">Settings, language, themes</a>
+      <a href="#en-privacidad">Privacy</a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ===================================================== ESPAÑOL -->
+    <div data-l="es">
+      <div class="hero" id="que-es">
+        <h1>TÁNDEM</h1>
+        <div class="note warn">Esta guía corresponde a la <b>próxima versión</b>. Los motores Codex, el respaldo automático, los modos de permisos y las preguntas con opciones llegan con ella; la versión publicada hoy funciona con Claude Code.</div>
+        <p class="lead">Una consola de escritorio para trabajar con IA sobre tus proyectos: conversas con el agente, apruebas lo que hace, revisas los diffs, manejas git y ves en todo momento qué está pasando.</p>
+        <ul class="pills"><li>Windows · macOS · Linux</li><li>Claude Code</li><li>Codex</li><li>Español · English</li></ul>
+      </div>
+      <figure><img src="img/inicio.png" alt="Pantalla de inicio de Tándem con los proyectos del espacio de trabajo" loading="lazy" /><figcaption>Inicio: tus proyectos del espacio de trabajo y las sesiones recientes.</figcaption></figure>
+
+      <section id="instalar">
+        <h2>Instalación</h2>
+        <ol>
+          <li>Descarga el instalador para tu sistema desde <a href="https://github.com/capl-dev/tandem-consola-releases/releases">Releases</a>: <code>.msi</code> o <code>.exe</code> en Windows, <code>.dmg</code> en macOS, <code>.AppImage</code>, <code>.deb</code> o <code>.rpm</code> en Linux.</li>
+          <li>Instala al menos uno de los motores y abre sesión una vez en una terminal:
+            <ul>
+              <li><b>Claude Code</b> (suscripción Pro, Max, Team o Enterprise): instálalo desde <code>code.claude.com</code> y ejecuta <code>claude</code>.</li>
+              <li><b>Codex</b> (cuenta de ChatGPT o API key de OpenAI): <code>npm install -g @openai/codex</code> y luego <code>codex login</code>.</li>
+            </ul>
+          </li>
+          <li>Abre Tándem. El asistente detecta qué tienes instalado y si la sesión está activa.</li>
+        </ol>
+        <div class="note">Tándem lanza el <code>claude</code> o el <code>codex</code> que tú instalaste, con tu propia sesión. No lee ni guarda tus credenciales y el consumo sale de tu plan.</div>
+      </section>
+
+      <section id="asistente">
+        <h2>Primer inicio: el asistente</h2>
+        <p>La primera vez se abre un asistente de seis pasos: idioma, motor de IA, espacio de trabajo, modelos, apariencia y resumen. Cada opción tiene un ⓘ que explica para qué sirve. Puedes reabrirlo cuando quieras desde <b>Ajustes → Abrir el asistente de configuración</b>.</p>
+        <figure><img src="img/asistente.png" alt="Asistente de configuración, paso de elección del motor" loading="lazy" /><figcaption>Eliges el motor principal y, si quieres, un motor de respaldo.</figcaption></figure>
+      </section>
+
+      <section id="proyectos">
+        <h2>Proyectos y sesiones</h2>
+        <p>En <b>Ajustes → Espacio de trabajo</b> indicas la carpeta donde guardas tus proyectos y, si quieres, un proyecto preferido. Desde el inicio abres cualquiera con un clic; cada pestaña es una sesión con su propia conversación y su propio motor.</p>
+        <ul>
+          <li><kbd>Ctrl</kbd>+<kbd>N</kbd> o <b>＋</b> en la barra de pestañas vuelve al inicio para abrir otra sesión.</li>
+          <li>Las sesiones se guardan solas y puedes retomarlas desde <b>Historial</b>.</li>
+          <li>La barra inferior muestra la carpeta, la rama, los cambios sin commit, el uso de contexto, el uso de tu plan y la sesión.</li>
+        </ul>
+      </section>
+
+      <section id="motores">
+        <h2>Motores: Claude Code y Codex</h2>
+        <div class="grid2">
+          <div class="card"><b>Claude Code</b><p>Usa tu suscripción. Reconoce tus comandos, skills, agentes y servidores MCP.</p></div>
+          <div class="card"><b>Codex</b><p>Usa el Codex CLI de OpenAI con tu cuenta. Tiene los mismos modos, aprobaciones y lista de archivos editados.</p></div>
+          <div class="card"><b>API key</b><p>Agente propio de Tándem sobre la API de Anthropic, con todas las optimizaciones de tokens. Pagas por uso.</p></div>
+        </div>
+        <p>Cada sesión tiene un <b>selector de motor</b> en la cabecera. También puedes escribir <code>/motor claude</code>, <code>/motor codex</code> o <code>/motor api</code>. Al cambiar, el motor nuevo recibe un resumen de la conversación y sigue donde quedó. Si vuelves a un motor que ya usaste, retoma su conversación y solo recibe lo que pasó mientras no estaba.</p>
+        <figure><img src="img/codex-auto.png" alt="Sesión con Codex en modo automático editando un archivo" loading="lazy" /><figcaption>La misma sesión pasada a Codex: revisa los archivos y edita sin pedir permiso en modo Automático.</figcaption></figure>
+      </section>
+
+      <section id="respaldo">
+        <h2>Respaldo automático</h2>
+        <p>En <b>Ajustes → Motor de respaldo</b> eliges otro motor. Si el de una sesión llega a su límite de uso, Tándem:</p>
+        <ol>
+          <li>pasa la sesión al motor de respaldo con un resumen de lo hablado,</li>
+          <li>reenvía tu último mensaje, el que quedó sin respuesta,</li>
+          <li>marca la sesión con la etiqueta <b>respaldo</b>,</li>
+          <li>vuelve al motor original en tu siguiente mensaje cuando su límite se reinicie (puedes desactivarlo).</li>
+        </ol>
+        <p><b>Varias cuentas de Claude:</b> en <b>Ajustes → Cuentas de Claude Code</b> creas un perfil por cuenta (por ejemplo, personal y de empresa). Cada perfil guarda su sesión aparte y cambias entre ellos a mano.</p>
+      </section>
+
+      <section id="modos">
+        <h2>Modos de permisos</h2>
+        <p>Debajo del cuadro de texto eliges cómo trabaja el agente. Pulsa <kbd>Shift</kbd>+<kbd>Tab</kbd> para pasar al siguiente modo.</p>
+        <table>
+          <tr><th>Modo</th><th>Qué hace</th></tr>
+          <tr><td><b>Manual</b></td><td>Pide tu aprobación antes de editar archivos o ejecutar comandos.</td></tr>
+          <tr><td><b>Aceptar ediciones</b></td><td>Edita archivos del proyecto sin preguntar; pide aprobación para los comandos.</td></tr>
+          <tr><td><b>Plan</b></td><td>Solo investiga y te propone un plan. No cambia nada hasta que lo apruebes.</td></tr>
+          <tr><td><b>Automático</b></td><td>Hace lo seguro sin preguntar (leer, buscar, editar dentro del proyecto) y te consulta lo riesgoso.</td></tr>
+        </table>
+        <figure><img src="img/modo-plan.png" alt="Modo plan: el agente propone un plan y espera aprobación" loading="lazy" /><figcaption>Modo Plan: el plan se muestra completo y decides si se ejecuta.</figcaption></figure>
+        <p>Cuando el agente necesita que elijas entre varias opciones, aparece una tarjeta con botones y un campo para escribir otra respuesta.</p>
+      </section>
+
+      <section id="comandos">
+        <h2>Comandos con <code>/</code></h2>
+        <p>Escribe <code>/</code> en el cuadro de texto y verás los comandos de Tándem junto con los comandos, skills y workflows que tu Claude Code reconoce en ese proyecto. Algunos útiles:</p>
+        <table>
+          <tr><td><code>/motor</code></td><td>Cambia el motor de la sesión.</td></tr>
+          <tr><td><code>/mcp</code></td><td>Estado de tus servidores MCP (Claude Code).</td></tr>
+          <tr><td><code>/modelo</code>, <code>/esfuerzo</code></td><td>Cambian el modelo o el nivel de razonamiento.</td></tr>
+          <tr><td><code>/compactar</code>, <code>/contexto</code></td><td>Resumen la conversación o cuentan los tokens del contexto.</td></tr>
+          <tr><td><code>/skill</code>, <code>/nota</code>, <code>/adjuntar</code></td><td>Cargan skills y notas.</td></tr>
+          <tr><td><code>/git status</code>, <code>/git pull</code>, <code>/git commit</code>…</td><td>Git sin salir del cuadro de texto.</td></tr>
+          <tr><td><code>/ayuda</code></td><td>Todos los comandos y atajos.</td></tr>
+        </table>
+        <p>Usa <code>@</code> para adjuntar notas y <code>!</code> para ejecutar algo en la terminal integrada.</p>
+      </section>
+
+      <section id="archivos">
+        <h2>Archivos y diffs</h2>
+        <p>El panel <b>Archivos</b> muestra el árbol del proyecto y, arriba, los archivos que el agente editó en la sesión. Haz clic en uno para ver su diff junto a la conversación. Con <b>Seguir al agente</b> activado, el diff se abre solo cada vez que termina de editar un archivo.</p>
+        <p>Arrastra cualquier archivo al cuadro de texto para insertar su ruta.</p>
+        <figure><img src="img/diff.png" alt="Diff de un archivo editado junto a la conversación" loading="lazy" /><figcaption>Diff del archivo editado, con botones para prepararlo o abrirlo completo.</figcaption></figure>
+      </section>
+
+      <section id="git">
+        <h2>Git y pull requests</h2>
+        <p>El panel <b>Git</b> (<kbd>Ctrl</kbd>+<kbd>5</kbd>) reúne fetch, pull, push y checkout de ramas; cambios preparados y sin preparar; commit con mensaje sugerido por la IA; stash e historial. Haz clic en un commit para ver sus archivos y diffs.</p>
+        <ul>
+          <li><b>Conflictos:</b> durante un merge eliges por archivo «mío», «suyo» o editas a mano, y luego continúas o abortas.</li>
+          <li><b>Preparar pull request:</b> la IA redacta título y descripción a partir de tus commits; tú revisas y lo creas con <code>gh</code>.</li>
+        </ul>
+        <figure><img src="img/git.png" alt="Panel de git con rama, acciones, cambios e historial" loading="lazy" /><figcaption>Panel de git: rama actual, acciones, cambios e historial de commits.</figcaption></figure>
+      </section>
+
+      <section id="subagentes">
+        <h2>Subagentes</h2>
+        <p>Cuando el agente delega una tarea, aparece una tarjeta con el rol, el modelo y el estado. Con <b>Ver detalle</b> abres la tarea, cada herramienta que usó y lo que devolvió al agente principal. El panel <b>Agentes y sesiones</b> lista además los agentes que tu Claude Code tiene disponibles.</p>
+      </section>
+
+      <section id="notas">
+        <h2>Notas y skills</h2>
+        <p>Escribe y guarda notas <code>.md</code> en el panel <b>Notas</b> para reutilizarlas: adjúntalas a un mensaje con <code>@</code> o fíjalas para que acompañen a todas las sesiones del proyecto. En <b>Skills</b> cargas o quitas skills en cualquier momento.</p>
+      </section>
+
+      <section id="rendimiento">
+        <h2>Tokens y rendimiento</h2>
+        <p>El inspector de la derecha muestra el contexto usado, los aciertos de caché y el uso de tu plan (ventana de 5 horas y semanal). El panel <b>Rendimiento</b> muestra CPU, RAM y lo que Tándem y el agente están ejecutando, útil cuando compila o corre pruebas.</p>
+        <figure class="narrow"><img src="img/rendimiento-panel.png" alt="Panel de rendimiento con CPU y RAM" loading="lazy" /><figcaption>CPU, RAM y la actividad de Tándem.</figcaption></figure>
+      </section>
+
+      <section id="atajos">
+        <h2>Atajos de teclado</h2>
+        <table>
+          <tr><td><kbd>Ctrl</kbd>+<kbd>K</kbd></td><td>Paleta de comandos</td></tr>
+          <tr><td><kbd>Ctrl</kbd>+<kbd>1</kbd>…<kbd>7</kbd></td><td>Paneles: agentes, archivos, notas, skills, git, tokens, rendimiento</td></tr>
+          <tr><td><kbd>Ctrl</kbd>+<kbd>,</kbd></td><td>Ajustes</td></tr>
+          <tr><td><kbd>Ctrl</kbd>+<kbd>J</kbd></td><td>Terminal integrada</td></tr>
+          <tr><td><kbd>Ctrl</kbd>+<kbd>B</kbd> / <kbd>Ctrl</kbd>+<kbd>I</kbd></td><td>Mostrar u ocultar el panel lateral / el inspector</td></tr>
+          <tr><td><kbd>Ctrl</kbd>+<kbd>N</kbd></td><td>Nueva sesión (inicio)</td></tr>
+          <tr><td><kbd>Ctrl</kbd>+<kbd>L</kbd></td><td>Ir al cuadro de texto</td></tr>
+          <tr><td><kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Cambiar el modo de permisos</td></tr>
+          <tr><td><kbd>Esc</kbd></td><td>Detener el turno actual</td></tr>
+        </table>
+        <p>En macOS usa <kbd>⌘</kbd> en lugar de <kbd>Ctrl</kbd>.</p>
+      </section>
+
+      <section id="ajustes">
+        <h2>Ajustes, idioma y temas</h2>
+        <p>En <b>Ajustes</b> cambias el motor, las cuentas, el respaldo, el espacio de trabajo, los modelos, la terminal (CMD, PowerShell o la del sistema), los temas, el tamaño de iconos y qué se ve en la barra inferior. La interfaz está en <b>español</b> e <b>inglés</b>. Todo se guarda en <code>~/.tandem/config.toml</code>.</p>
+        <figure><img src="img/ajustes.png" alt="Ajustes con el motor principal, Codex y el motor de respaldo" loading="lazy" /><figcaption>Ajustes: motor principal, estado de Claude Code y Codex, y motor de respaldo.</figcaption></figure>
+      </section>
+
+      <section id="privacidad">
+        <h2>Privacidad</h2>
+        <ul>
+          <li>Tándem no lee ni guarda las credenciales de Claude Code ni de Codex: usa los programas oficiales con tu sesión.</li>
+          <li>No envía datos a servidores propios. Las conversaciones se guardan en tu equipo, en <code>~/.tandem</code>.</li>
+          <li>La configuración de tus servidores MCP (que puede contener tokens) nunca se muestra en la interfaz.</li>
+        </ul>
+      </section>
+    </div>
+
+    <!-- ===================================================== ENGLISH -->
+    <div data-l="en">
+      <div class="hero" id="en-que-es">
+        <h1>TÁNDEM</h1>
+        <div class="note warn">This guide covers the <b>upcoming version</b>. The Codex engine, automatic fallback, permission modes and option questions arrive with it; the version available today works with Claude Code.</div>
+        <p class="lead">A desktop console for working with AI on your projects: chat with the agent, approve what it does, review diffs, handle git and always see what is going on.</p>
+        <ul class="pills"><li>Windows · macOS · Linux</li><li>Claude Code</li><li>Codex</li><li>Español · English</li></ul>
+      </div>
+      <figure><img src="img/inicio.png" alt="Tándem home screen with workspace projects" loading="lazy" /><figcaption>Home: the projects in your workspace and recent sessions.</figcaption></figure>
+
+      <section id="en-instalar">
+        <h2>Installation</h2>
+        <ol>
+          <li>Download the installer for your system from <a href="https://github.com/capl-dev/tandem-consola-releases/releases">Releases</a>: <code>.msi</code> or <code>.exe</code> on Windows, <code>.dmg</code> on macOS, <code>.AppImage</code>, <code>.deb</code> or <code>.rpm</code> on Linux.</li>
+          <li>Install at least one engine and sign in once from a terminal:
+            <ul>
+              <li><b>Claude Code</b> (Pro, Max, Team or Enterprise subscription): install it from <code>code.claude.com</code> and run <code>claude</code>.</li>
+              <li><b>Codex</b> (ChatGPT account or OpenAI API key): <code>npm install -g @openai/codex</code>, then <code>codex login</code>.</li>
+            </ul>
+          </li>
+          <li>Open Tándem. The assistant detects what is installed and whether you are signed in.</li>
+        </ol>
+        <div class="note">Tándem launches the <code>claude</code> or <code>codex</code> you installed, with your own session. It never reads or stores your credentials, and usage comes from your plan.</div>
+      </section>
+
+      <section id="en-asistente">
+        <h2>First launch: the assistant</h2>
+        <p>On first launch a six-step assistant opens: language, AI engine, workspace, models, appearance and summary. Every option has an ⓘ explaining what it does. You can reopen it any time from <b>Settings → Open the setup assistant</b>.</p>
+        <figure><img src="img/asistente.png" alt="Setup assistant, engine step" loading="lazy" /><figcaption>Pick your main engine and, optionally, a fallback engine.</figcaption></figure>
+      </section>
+
+      <section id="en-proyectos">
+        <h2>Projects and sessions</h2>
+        <p>In <b>Settings → Workspace</b> you set the folder where you keep your projects and, optionally, a preferred project. Open any of them from the home screen with one click; each tab is a session with its own conversation and engine.</p>
+        <ul>
+          <li><kbd>Ctrl</kbd>+<kbd>N</kbd> or <b>＋</b> in the tab bar goes back home to open another session.</li>
+          <li>Sessions are saved automatically and can be resumed from <b>History</b>.</li>
+          <li>The status bar shows the folder, branch, uncommitted changes, context usage, plan usage and sign-in status.</li>
+        </ul>
+      </section>
+
+      <section id="en-motores">
+        <h2>Engines: Claude Code and Codex</h2>
+        <div class="grid2">
+          <div class="card"><b>Claude Code</b><p>Uses your subscription. Recognizes your commands, skills, agents and MCP servers.</p></div>
+          <div class="card"><b>Codex</b><p>Uses the OpenAI Codex CLI with your account. Same modes, approvals and edited-files list.</p></div>
+          <div class="card"><b>API key</b><p>Tándem's own agent on the Anthropic API, with every token optimization. Pay per use.</p></div>
+        </div>
+        <p>Each session has an <b>engine selector</b> in its header. You can also type <code>/motor claude</code>, <code>/motor codex</code> or <code>/motor api</code>. When you switch, the new engine receives a summary of the conversation and picks up where it left off. Switching back to an engine you already used resumes its own conversation and only passes what happened in between.</p>
+        <figure><img src="img/codex-auto.png" alt="Session on Codex in auto mode editing a file" loading="lazy" /><figcaption>The same session moved to Codex: it reads the files and edits without asking in Auto mode.</figcaption></figure>
+      </section>
+
+      <section id="en-respaldo">
+        <h2>Automatic fallback</h2>
+        <p>In <b>Settings → Fallback engine</b> pick another engine. When a session's engine hits its usage limit, Tándem:</p>
+        <ol>
+          <li>moves the session to the fallback engine with a summary of the conversation,</li>
+          <li>resends your last message, the one left unanswered,</li>
+          <li>tags the session as <b>fallback</b>,</li>
+          <li>switches back to the original engine on your next message once its limit resets (can be turned off).</li>
+        </ol>
+        <p><b>Several Claude accounts:</b> in <b>Settings → Claude Code accounts</b> create one profile per account (for example personal and work). Each profile keeps its own session, and you switch between them manually.</p>
+      </section>
+
+      <section id="en-modos">
+        <h2>Permission modes</h2>
+        <p>Below the prompt box you choose how the agent works. Press <kbd>Shift</kbd>+<kbd>Tab</kbd> to cycle modes.</p>
+        <table>
+          <tr><th>Mode</th><th>What it does</th></tr>
+          <tr><td><b>Manual</b></td><td>Asks for your approval before editing files or running commands.</td></tr>
+          <tr><td><b>Accept edits</b></td><td>Edits project files without asking; asks before running commands.</td></tr>
+          <tr><td><b>Plan</b></td><td>Only researches and proposes a plan. Changes nothing until you approve.</td></tr>
+          <tr><td><b>Auto</b></td><td>Does the safe things without asking (read, search, edit inside the project) and checks with you on risky ones.</td></tr>
+        </table>
+        <figure><img src="img/modo-plan.png" alt="Plan mode: the agent proposes a plan and waits for approval" loading="lazy" /><figcaption>Plan mode: the full plan is shown and you decide whether it runs.</figcaption></figure>
+        <p>When the agent needs you to pick between options, a card appears with buttons and a field to type a different answer.</p>
+      </section>
+
+      <section id="en-comandos">
+        <h2>Slash commands</h2>
+        <p>Type <code>/</code> in the prompt box to see Tándem's commands together with the commands, skills and workflows your Claude Code recognizes in that project. Some useful ones:</p>
+        <table>
+          <tr><td><code>/motor</code></td><td>Switch the session's engine.</td></tr>
+          <tr><td><code>/mcp</code></td><td>Status of your MCP servers (Claude Code).</td></tr>
+          <tr><td><code>/modelo</code>, <code>/esfuerzo</code></td><td>Change the model or reasoning effort.</td></tr>
+          <tr><td><code>/compactar</code>, <code>/contexto</code></td><td>Summarize the conversation or count context tokens.</td></tr>
+          <tr><td><code>/skill</code>, <code>/nota</code>, <code>/adjuntar</code></td><td>Load skills and notes.</td></tr>
+          <tr><td><code>/git status</code>, <code>/git pull</code>, <code>/git commit</code>…</td><td>Git without leaving the prompt box.</td></tr>
+          <tr><td><code>/ayuda</code></td><td>All commands and shortcuts.</td></tr>
+        </table>
+        <p>Use <code>@</code> to attach notes and <code>!</code> to run something in the built-in terminal.</p>
+      </section>
+
+      <section id="en-archivos">
+        <h2>Files and diffs</h2>
+        <p>The <b>Files</b> panel shows the project tree and, at the top, the files the agent edited in this session. Click one to see its diff next to the conversation. With <b>Follow the agent</b> on, the diff opens automatically each time it finishes editing a file.</p>
+        <p>Drag any file into the prompt box to insert its path.</p>
+        <figure><img src="img/diff.png" alt="Diff of an edited file next to the conversation" loading="lazy" /><figcaption>Diff of the edited file, with buttons to stage it or open the whole file.</figcaption></figure>
+      </section>
+
+      <section id="en-git">
+        <h2>Git and pull requests</h2>
+        <p>The <b>Git</b> panel (<kbd>Ctrl</kbd>+<kbd>5</kbd>) brings together fetch, pull, push and branch checkout; staged and unstaged changes; commit with an AI-suggested message; stash and history. Click a commit to see its files and diffs.</p>
+        <ul>
+          <li><b>Conflicts:</b> during a merge pick "mine", "theirs" or edit by hand per file, then continue or abort.</li>
+          <li><b>Prepare pull request:</b> the AI drafts the title and description from your commits; you review and create it with <code>gh</code>.</li>
+        </ul>
+        <figure><img src="img/git.png" alt="Git panel with branch, actions, changes and history" loading="lazy" /><figcaption>Git panel: current branch, actions, changes and commit history.</figcaption></figure>
+      </section>
+
+      <section id="en-subagentes">
+        <h2>Subagents</h2>
+        <p>When the agent delegates a task, a card shows the role, model and status. <b>View details</b> opens the task, every tool it used and what it returned to the main agent. The <b>Agents and sessions</b> panel also lists the agents available in your Claude Code.</p>
+      </section>
+
+      <section id="en-notas">
+        <h2>Notes and skills</h2>
+        <p>Write and save <code>.md</code> notes in the <b>Notes</b> panel to reuse them: attach them to a message with <code>@</code> or pin them so they go with every session in the project. In <b>Skills</b> you load or unload skills at any time.</p>
+      </section>
+
+      <section id="en-rendimiento">
+        <h2>Tokens and performance</h2>
+        <p>The inspector on the right shows context usage, cache hits and your plan usage (5-hour and weekly windows). The <b>Performance</b> panel shows CPU, RAM and what Tándem and the agent are running, handy while it builds or runs tests.</p>
+        <figure class="narrow"><img src="img/rendimiento-panel.png" alt="Performance panel with CPU and RAM" loading="lazy" /><figcaption>CPU, RAM and Tándem's activity.</figcaption></figure>
+      </section>
+
+      <section id="en-atajos">
+        <h2>Keyboard shortcuts</h2>
+        <table>
+          <tr><td><kbd>Ctrl</kbd>+<kbd>K</kbd></td><td>Command palette</td></tr>
+          <tr><td><kbd>Ctrl</kbd>+<kbd>1</kbd>…<kbd>7</kbd></td><td>Panels: agents, files, notes, skills, git, tokens, performance</td></tr>
+          <tr><td><kbd>Ctrl</kbd>+<kbd>,</kbd></td><td>Settings</td></tr>
+          <tr><td><kbd>Ctrl</kbd>+<kbd>J</kbd></td><td>Built-in terminal</td></tr>
+          <tr><td><kbd>Ctrl</kbd>+<kbd>B</kbd> / <kbd>Ctrl</kbd>+<kbd>I</kbd></td><td>Toggle side panel / inspector</td></tr>
+          <tr><td><kbd>Ctrl</kbd>+<kbd>N</kbd></td><td>New session (home)</td></tr>
+          <tr><td><kbd>Ctrl</kbd>+<kbd>L</kbd></td><td>Focus the prompt box</td></tr>
+          <tr><td><kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Cycle permission mode</td></tr>
+          <tr><td><kbd>Esc</kbd></td><td>Stop the current turn</td></tr>
+        </table>
+        <p>On macOS use <kbd>⌘</kbd> instead of <kbd>Ctrl</kbd>.</p>
+      </section>
+
+      <section id="en-ajustes">
+        <h2>Settings, language and themes</h2>
+        <p>In <b>Settings</b> you change the engine, accounts, fallback, workspace, models, terminal (CMD, PowerShell or the system shell), themes, icon size and what the status bar shows. The interface is available in <b>Spanish</b> and <b>English</b>. Everything is stored in <code>~/.tandem/config.toml</code>.</p>
+        <figure><img src="img/ajustes.png" alt="Settings with main engine, Codex and fallback engine" loading="lazy" /><figcaption>Settings: main engine, Claude Code and Codex status, and fallback engine.</figcaption></figure>
+      </section>
+
+      <section id="en-privacidad">
+        <h2>Privacy</h2>
+        <ul>
+          <li>Tándem never reads or stores Claude Code or Codex credentials: it uses the official programs with your session.</li>
+          <li>It does not send data to any server of its own. Conversations are stored on your computer, in <code>~/.tandem</code>.</li>
+          <li>Your MCP server configuration (which may contain tokens) is never shown in the interface.</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+</div>
+
+<footer class="sign">Powered by <b>Cristian Pareja</b> · <a href="mailto:Arleypareja4@gmail.com">Arleypareja4@gmail.com</a></footer>
+
+<script>
+  function store(k, v) { try { v === undefined ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} }
+  function read(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function setLang(l) {
+    document.documentElement.lang = l;
+    document.getElementById("b-es").classList.toggle("on", l === "es");
+    document.getElementById("b-en").classList.toggle("on", l === "en");
+    document.title = l === "es" ? "Tándem · Guía de usuario" : "Tándem · User guide";
+    store("tandem-guia-lang", l);
+  }
+  function setTheme(t) {
+    document.documentElement.dataset.theme = t;
+    document.getElementById("t-light").classList.toggle("on", t === "light");
+    document.getElementById("t-dark").classList.toggle("on", t === "dark");
+    store("tandem-guia-theme", t);
+  }
+  var q = new URLSearchParams(location.search).get("lang");
+  setLang(q === "en" || q === "es" ? q : read("tandem-guia-lang") || ((navigator.language || "es").slice(0, 2) === "en" ? "en" : "es"));
+  var th = read("tandem-guia-theme");
+  if (th) setTheme(th);
+  else {
+    var dark = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches;
+    document.getElementById(dark ? "t-dark" : "t-light").classList.add("on");
+  }
+</script>
+</body>
+</html>
