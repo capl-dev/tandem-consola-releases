@@ -10,7 +10,7 @@ Consola de escritorio para trabajar con IA (Claude Code y Codex) sobre tus proye
 
 Este repositorio solo publica los instaladores.
 
-📖 **[Guía de usuario](https://capl-dev.github.io/tandem-consola-releases/)** (español / English)
+📖 **[Guía de usuario](https://capl-dev.github.io/tandem-consola-releases/)** (español / English) · 🔒 **[Política de privacidad](https://capl-dev.github.io/tandem-consola-releases/privacidad/)**
 
 ## Descargar
 
@@ -48,8 +48,8 @@ Los instaladores todavía no están firmados digitalmente, así que el sistema p
   Alternativa por terminal: `xattr -dr com.apple.quarantine /Applications/Tandem.app`
 - **Linux**: `sudo apt install ./Tandem_*.deb` o `sudo dnf install ./Tandem_*.rpm`. Para el AppImage: `chmod +x Tandem_*.AppImage && ./Tandem_*.AppImage`.
 
-Tándem guarda su configuración en `~/.tandem`.
+Tándem guarda su configuración en `~/.tandem`. No recopila datos sobre ti: consulta la [política de privacidad](https://capl-dev.github.io/tandem-consola-releases/privacidad/).
 
 ---
 
-<p align="center">Powered by <b>Cristian Pareja</b> · <a href="mailto:Arleypareja4@gmail.com">Arleypareja4@gmail.com</a></p>
+<p align="center">Powered by <b>Cristian Pareja</b> · <a href="mailto:Arleypareja4@gmail.com">Arleypareja4@gmail.com</a> · <a href="https://capl-dev.github.io/tandem-consola-releases/privacidad/">Privacidad</a></p>
