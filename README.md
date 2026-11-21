@@ -14,7 +14,7 @@ Este repositorio solo publica los instaladores.
 
 ## Descargar
 
-Los instaladores se publicarán aquí, en **[Releases](../../releases)**, con la próxima versión. Archivos por sistema:
+Ve a **[Releases](../../releases/latest)** y descarga el archivo de tu sistema:
 
 | Sistema | Archivo |
 |---|---|
