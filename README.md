@@ -2,7 +2,8 @@
 
 Consola de escritorio para trabajar con IA (Claude Code y Codex) sobre tus proyectos, en Windows, macOS y Linux.
 
-- Conversa con Claude usando **tu suscripción** (Pro, Max, Team o Enterprise) a través de Claude Code.
+- Trabaja con **Claude Code** y **Codex** usando tus propias cuentas, y cambia de motor en mitad de una sesión sin perder el hilo.
+- Varias cuentas por motor: si una se queda sin tokens, Tándem pasa a la de respaldo y vuelve cuando se restablece el límite.
 - Aprueba cada edición o comando, mira los diffs en vivo y sigue lo que el agente va editando.
 - Notas markdown, skills, explorador de archivos y terminal integrada.
 - Git completo: ramas, commits, pull/push, historial, resolución de conflictos y pull requests redactados por IA.
@@ -27,13 +28,29 @@ Ve a **[Releases](../../releases/latest)** y descarga el archivo de tu sistema:
 
 ## Antes de usarla
 
-Tándem usa el Claude Code que tienes instalado, con tu propia sesión:
+Tándem usa los asistentes que tienes instalados, con tu propia sesión. Necesitas al menos uno de los dos; con ambos puedes cambiar de motor y usar uno como respaldo del otro.
+
+### Claude Code
 
 1. Instala Claude Code (guía oficial: <https://code.claude.com>).
-2. Abre una terminal, escribe `claude` e inicia sesión con tu cuenta.
-3. Abre Tándem y elige la carpeta de un proyecto.
+2. Abre una terminal, escribe `claude` e inicia sesión con tu cuenta (Pro, Max, Team o Enterprise).
 
 Si prefieres usar una API key de Anthropic en lugar de la suscripción, cámbialo en **Ajustes → Cuenta**.
+
+### Codex
+
+1. Instala Codex (guía oficial: <https://github.com/openai/codex>):
+   - **Windows** (PowerShell): `powershell -ExecutionPolicy ByPass -c "irm https://chatgpt.com/codex/install.ps1 | iex"`
+   - **macOS / Linux**: `curl -fsSL https://chatgpt.com/codex/install.sh | sh`
+   - O con npm en cualquier sistema: `npm install -g @openai/codex`
+2. Abre una terminal, escribe `codex` y elige **Sign in with ChatGPT** para iniciar sesión con tu cuenta de ChatGPT. Una cuenta gratuita sirve como respaldo.
+
+### Empezar
+
+1. Abre Tándem. El asistente de bienvenida detecta qué motores tienes y te deja elegir el principal y el de respaldo.
+2. Elige la carpeta de un proyecto y escribe lo que necesitas.
+
+Puedes cambiar de motor en cualquier momento desde el selector de la barra superior, y agregar más cuentas en **Ajustes**.
 
 ## Instalación y avisos del sistema
 
