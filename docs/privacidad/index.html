@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tándem · Política de privacidad</title>
+<meta name="description" content="Política de privacidad de Tándem, consola de escritorio para trabajar con IA sobre tus proyectos." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f6f5f1; --card: #ffffff; --fg: #1d2129; --muted: #5d6472; --line: #d9d7cf;
+    --accent: #2f6fd0; --accent-ink: #fff; --code: #eceae3;
+    --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace; --sans: "IBM Plex Sans", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12151b; --card: #1b2029; --fg: #e3e6ec; --muted: #9aa3b2; --line: #2c3340;
+      --accent: #7aa2ff; --accent-ink: #0d1220; --code: #222834;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #12151b; --card: #1b2029; --fg: #e3e6ec; --muted: #9aa3b2; --line: #2c3340;
+    --accent: #7aa2ff; --accent-ink: #0d1220; --code: #222834;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.65 var(--sans); }
+  a { color: var(--accent); }
+  code { font-family: var(--mono); font-size: .88em; background: var(--code); padding: .1em .38em; border-radius: 5px; }
+  header.top { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .bar { max-width: 820px; margin: 0 auto; padding: 10px 16px; display: flex; align-items: center; gap: 14px; }
+  .logo { font: 600 18px var(--mono); letter-spacing: .14em; color: var(--accent); text-decoration: none; }
+  .bar .grow { flex: 1; }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .seg button { border: 0; background: none; color: var(--muted); font: 500 13px var(--sans); padding: 5px 11px; cursor: pointer; }
+  .seg button.on { background: var(--accent); color: var(--accent-ink); }
+  main { max-width: 820px; margin: 0 auto; padding: 34px 16px 60px; }
+  h1 { font-size: clamp(28px, 5vw, 38px); line-height: 1.15; margin: 0 0 6px; }
+  .date { color: var(--muted); margin: 0 0 22px; font-size: 14px; }
+  h2 { font-size: 20px; margin: 30px 0 6px; padding-top: 20px; border-top: 1px solid var(--line); }
+  .summary { background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; padding: 12px 16px; }
+  footer.sign { border-top: 1px solid var(--line); padding: 22px 16px 34px; text-align: center; color: var(--muted); font-size: 14px; }
+  footer.sign b { color: var(--fg); }
+  [data-l] { display: none; }
+  html[lang="es"] [data-l="es"], html[lang="en"] [data-l="en"] { display: revert; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="bar">
+    <a class="logo" href="../">TÁNDEM</a>
+    <span class="grow"></span>
+    <div class="seg" role="group" aria-label="Idioma / Language">
+      <button id="b-es" onclick="setLang('es')">ES</button>
+      <button id="b-en" onclick="setLang('en')">EN</button>
+    </div>
+    <div class="seg" role="group" aria-label="Tema / Theme">
+      <button id="t-light" onclick="setTheme('light')">☀</button>
+      <button id="t-dark" onclick="setTheme('dark')">☾</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <article data-l="es">
+    <h1>Política de privacidad</h1>
+    <p class="date">Última actualización: 21 de noviembre de 2026</p>
+    <p>Tándem es una aplicación de escritorio desarrollada por Cristian Pareja. Esta política explica qué datos maneja la aplicación.</p>
+    <p class="summary"><b>En resumen:</b> Tándem no recopila datos sobre ti. Todo lo que genera se queda en tu equipo.</p>
+
+    <h2>Datos que recopila el desarrollador</h2>
+    <p><b>Ninguno.</b> Tándem no tiene cuentas de usuario, analítica, telemetría ni publicidad, y no envía al desarrollador información sobre ti, tus proyectos o tu uso de la aplicación.</p>
+
+    <h2>Datos que se guardan en tu equipo</h2>
+    <p>La aplicación guarda localmente, en la carpeta <code>.tandem</code> de tu usuario:</p>
+    <ul>
+      <li>su configuración y preferencias;</li>
+      <li>el historial de tus sesiones de trabajo;</li>
+      <li>un identificador de instalación generado al azar, que no se transmite a ningún lugar.</li>
+    </ul>
+    <p>Estos datos permanecen en tu equipo y puedes borrarlos cuando quieras eliminando esa carpeta.</p>
+
+    <h2>Servicios de terceros</h2>
+    <p>Tándem funciona como interfaz de herramientas que tú instalas y configuras:</p>
+    <ul>
+      <li><b>Claude Code (Anthropic) y Codex (OpenAI).</b> El contenido que envías a estos asistentes, incluidos tus mensajes y los archivos de proyecto que ellos lean, lo procesan esos proveedores según sus propias políticas de privacidad. Tándem no lee ni almacena las credenciales de esas herramientas.</li>
+      <li><b>API de Anthropic (opcional).</b> Si configuras una clave de API, se guarda solo en tu equipo y únicamente se envía a Anthropic para autenticar tus solicitudes.</li>
+      <li><b>Git y servicios de repositorios.</b> Las operaciones de Git (fetch, push, etc.) se conectan a los servidores que tú tengas configurados en tus repositorios.</li>
+    </ul>
+
+    <h2>Conexiones del desarrollador</h2>
+    <p>La aplicación consulta periódicamente información de servicio publicada por el desarrollador y alojada en GitHub. Esa consulta no incluye datos personales ni identificadores. Como en cualquier solicitud web, GitHub puede registrar datos técnicos como la dirección IP, según su propia política de privacidad.</p>
+
+    <h2>Menores de edad</h2>
+    <p>Tándem es una herramienta para desarrolladores y no está dirigida a menores de 13 años.</p>
+
+    <h2>Cambios</h2>
+    <p>Si esta política cambia, se publicará la versión actualizada en esta misma página.</p>
+
+    <h2>Contacto</h2>
+    <p>Cristian Pareja · <a href="mailto:Arleypareja4@gmail.com">Arleypareja4@gmail.com</a></p>
+  </article>
+
+  <article data-l="en">
+    <h1>Privacy policy</h1>
+    <p class="date">Last updated: November 21, 2026</p>
+    <p>Tándem is a desktop application developed by Cristian Pareja. This policy explains what data the application handles.</p>
+    <p class="summary"><b>In short:</b> Tándem does not collect data about you. Everything it creates stays on your computer.</p>
+
+    <h2>Data collected by the developer</h2>
+    <p><b>None.</b> Tándem has no user accounts, analytics, telemetry or advertising, and it does not send the developer any information about you, your projects or how you use the application.</p>
+
+    <h2>Data stored on your computer</h2>
+    <p>The application stores locally, in your user's <code>.tandem</code> folder:</p>
+    <ul>
+      <li>its settings and preferences;</li>
+      <li>the history of your work sessions;</li>
+      <li>a randomly generated installation identifier, which is never transmitted anywhere.</li>
+    </ul>
+    <p>This data stays on your computer and you can delete it at any time by removing that folder.</p>
+
+    <h2>Third-party services</h2>
+    <p>Tándem is an interface for tools that you install and configure yourself:</p>
+    <ul>
+      <li><b>Claude Code (Anthropic) and Codex (OpenAI).</b> Content you send to these assistants, including your messages and any project files they read, is processed by those providers under their own privacy policies. Tándem does not read or store the credentials of those tools.</li>
+      <li><b>Anthropic API (optional).</b> If you configure an API key, it is stored only on your computer and is sent only to Anthropic to authenticate your requests.</li>
+      <li><b>Git and repository services.</b> Git operations (fetch, push, etc.) connect to the servers configured in your repositories.</li>
+    </ul>
+
+    <h2>Connections to the developer</h2>
+    <p>The application periodically checks service information published by the developer and hosted on GitHub. That request contains no personal data or identifiers. As with any web request, GitHub may log technical data such as the IP address, under its own privacy policy.</p>
+
+    <h2>Children</h2>
+    <p>Tándem is a tool for developers and is not directed at children under 13.</p>
+
+    <h2>Changes</h2>
+    <p>If this policy changes, the updated version will be published on this same page.</p>
+
+    <h2>Contact</h2>
+    <p>Cristian Pareja · <a href="mailto:Arleypareja4@gmail.com">Arleypareja4@gmail.com</a></p>
+  </article>
+</main>
+
+<footer class="sign">Powered by <b>Cristian Pareja</b> · <a href="mailto:Arleypareja4@gmail.com">Arleypareja4@gmail.com</a></footer>
+
+<script>
+  function store(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function read(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function setLang(l) {
+    document.documentElement.lang = l;
+    document.getElementById("b-es").classList.toggle("on", l === "es");
+    document.getElementById("b-en").classList.toggle("on", l === "en");
+    document.title = l === "es" ? "Tándem · Política de privacidad" : "Tándem · Privacy policy";
+    store("tandem-guia-lang", l);
+  }
+  function setTheme(t) {
+    document.documentElement.dataset.theme = t;
+    document.getElementById("t-light").classList.toggle("on", t === "light");
+    document.getElementById("t-dark").classList.toggle("on", t === "dark");
+    store("tandem-guia-theme", t);
+  }
+  var q = new URLSearchParams(location.search).get("lang");
+  setLang(q === "en" || q === "es" ? q : read("tandem-guia-lang") || ((navigator.language || "es").slice(0, 2) === "en" ? "en" : "es"));
+  var th = read("tandem-guia-theme");
+  if (th) setTheme(th);
+  else {
+    var dark = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches;
+    document.getElementById(dark ? "t-dark" : "t-light").classList.add("on");
+  }
+</script>
+</body>
+</html>
