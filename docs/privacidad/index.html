@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Tándem · Política de privacidad</title>
+<title>Tándem · Privacidad y seguridad</title>
 <meta name="description" content="Política de privacidad de Tándem, consola de escritorio para trabajar con IA sobre tus proyectos." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -64,8 +64,8 @@
 
 <main>
   <article data-l="es">
-    <h1>Política de privacidad</h1>
-    <p class="date">Última actualización: 21 de noviembre de 2026</p>
+    <h1>Privacidad y seguridad</h1>
+    <p class="date">Última actualización: 23 de noviembre de 2026</p>
     <p>Tándem es una aplicación de escritorio desarrollada por Cristian Pareja. Esta política explica qué datos maneja la aplicación.</p>
     <p class="summary"><b>En resumen:</b> Tándem no recopila datos sobre ti. Todo lo que genera se queda en tu equipo.</p>
 
@@ -87,10 +87,29 @@
       <li><b>Claude Code (Anthropic) y Codex (OpenAI).</b> El contenido que envías a estos asistentes, incluidos tus mensajes y los archivos de proyecto que ellos lean, lo procesan esos proveedores según sus propias políticas de privacidad. Tándem no lee ni almacena las credenciales de esas herramientas.</li>
       <li><b>API de Anthropic (opcional).</b> Si configuras una clave de API, se guarda solo en tu equipo y únicamente se envía a Anthropic para autenticar tus solicitudes.</li>
       <li><b>Git y servicios de repositorios.</b> Las operaciones de Git (fetch, push, etc.) se conectan a los servidores que tú tengas configurados en tus repositorios.</li>
+      <li><b>Control remoto de Claude Code (opcional).</b> Si lo enciendes en una sesión, Claude Code la conecta a claude.ai para que puedas seguirla desde el navegador o la app móvil de Claude, según las condiciones de Anthropic. Se apaga cuando tú lo indicas o al cerrar la sesión.</li>
     </ul>
 
     <h2>Conexiones del desarrollador</h2>
     <p>La aplicación consulta periódicamente información de servicio publicada por el desarrollador y alojada en GitHub. Esa consulta no incluye datos personales ni identificadores. Como en cualquier solicitud web, GitHub puede registrar datos técnicos como la dirección IP, según su propia política de privacidad.</p>
+
+    <h2>Actualizaciones</h2>
+    <p>Tándem revisa al abrirse, y cada pocas horas, si hay una versión nueva en las publicaciones públicas del proyecto en GitHub. Esa consulta descarga un archivo con el número de la versión más reciente y no envía datos personales ni identificadores.</p>
+    <ul>
+      <li>Nunca se actualiza sin tu permiso: te avisa y tú decides cuándo instalar.</li>
+      <li>Cada actualización está <b>firmada digitalmente</b> por el desarrollador. Tándem comprueba la firma antes de instalar y descarta cualquier archivo que no coincida.</li>
+      <li>En Windows, el instalador recomendado instala Tándem solo para tu usuario, así que las actualizaciones no necesitan permisos de administrador.</li>
+      <li>La versión de la Microsoft Store no usa este mecanismo: la actualiza la propia Store.</li>
+    </ul>
+
+    <h2>Seguridad</h2>
+    <ul>
+      <li>Tándem no lee, guarda ni transmite las credenciales de Claude Code ni de Codex. El inicio de sesión lo hacen esas herramientas.</li>
+      <li>Los cambios que propone un agente se aplican según el modo que elijas (preguntar, aceptar ediciones, plan o automático) y las reglas de permisos de cada herramienta.</li>
+      <li>La vista previa de archivos HTML se muestra aislada: la página no puede acceder a la aplicación ni a otros archivos fuera de su carpeta.</li>
+      <li>La configuración de tus servidores MCP, que puede contener tokens, nunca se muestra en la interfaz.</li>
+    </ul>
+    <p>Si encuentras un problema de seguridad, escríbenos al correo de contacto.</p>
 
     <h2>Menores de edad</h2>
     <p>Tándem es una herramienta para desarrolladores y no está dirigida a menores de 13 años.</p>
@@ -103,8 +122,8 @@
   </article>
 
   <article data-l="en">
-    <h1>Privacy policy</h1>
-    <p class="date">Last updated: November 21, 2026</p>
+    <h1>Privacy and security</h1>
+    <p class="date">Last updated: November 23, 2026</p>
     <p>Tándem is a desktop application developed by Cristian Pareja. This policy explains what data the application handles.</p>
     <p class="summary"><b>In short:</b> Tándem does not collect data about you. Everything it creates stays on your computer.</p>
 
@@ -126,10 +145,29 @@
       <li><b>Claude Code (Anthropic) and Codex (OpenAI).</b> Content you send to these assistants, including your messages and any project files they read, is processed by those providers under their own privacy policies. Tándem does not read or store the credentials of those tools.</li>
       <li><b>Anthropic API (optional).</b> If you configure an API key, it is stored only on your computer and is sent only to Anthropic to authenticate your requests.</li>
       <li><b>Git and repository services.</b> Git operations (fetch, push, etc.) connect to the servers configured in your repositories.</li>
+      <li><b>Claude Code Remote Control (optional).</b> If you turn it on for a session, Claude Code connects it to claude.ai so you can follow it from the browser or the Claude mobile app, under Anthropic's terms. It turns off when you say so or when the session closes.</li>
     </ul>
 
     <h2>Connections to the developer</h2>
     <p>The application periodically checks service information published by the developer and hosted on GitHub. That request contains no personal data or identifiers. As with any web request, GitHub may log technical data such as the IP address, under its own privacy policy.</p>
+
+    <h2>Updates</h2>
+    <p>When it opens, and every few hours, Tándem checks the project's public releases on GitHub for a new version. That request downloads a file with the latest version number and sends no personal data or identifiers.</p>
+    <ul>
+      <li>It never updates without your permission: it lets you know and you decide when to install.</li>
+      <li>Every update is <b>digitally signed</b> by the developer. Tándem verifies the signature before installing and discards any file that doesn't match.</li>
+      <li>On Windows, the recommended installer installs Tándem for your user only, so updates don't need administrator rights.</li>
+      <li>The Microsoft Store version doesn't use this mechanism: the Store updates it.</li>
+    </ul>
+
+    <h2>Security</h2>
+    <ul>
+      <li>Tándem doesn't read, store or transmit Claude Code or Codex credentials. Those tools handle sign-in themselves.</li>
+      <li>Changes proposed by an agent are applied according to the mode you choose (ask, accept edits, plan or automatic) and each tool's permission rules.</li>
+      <li>HTML file previews are isolated: the page can't access the application or files outside its own folder.</li>
+      <li>Your MCP server configuration, which may contain tokens, is never shown in the interface.</li>
+    </ul>
+    <p>If you find a security issue, please write to the contact email.</p>
 
     <h2>Children</h2>
     <p>Tándem is a tool for developers and is not directed at children under 13.</p>
@@ -151,7 +189,7 @@
     document.documentElement.lang = l;
     document.getElementById("b-es").classList.toggle("on", l === "es");
     document.getElementById("b-en").classList.toggle("on", l === "en");
-    document.title = l === "es" ? "Tándem · Política de privacidad" : "Tándem · Privacy policy";
+    document.title = l === "es" ? "Tándem · Privacidad y seguridad" : "Tándem · Privacy and security";
     store("tandem-guia-lang", l);
   }
   function setTheme(t) {

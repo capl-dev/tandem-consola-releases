@@ -11,7 +11,7 @@ Consola de escritorio para trabajar con IA (Claude Code y Codex) sobre tus proye
 
 Este repositorio solo publica los instaladores.
 
-📖 **[Guía de usuario](https://capl-dev.github.io/tandem-consola-releases/)** (español / English) · 🔒 **[Política de privacidad](https://capl-dev.github.io/tandem-consola-releases/privacidad/)**
+📖 **[Guía de usuario](https://capl-dev.github.io/tandem-consola-releases/)** (español / English) · 🔒 **[Privacidad y seguridad](https://capl-dev.github.io/tandem-consola-releases/privacidad/)**
 
 ## Descargar
 
@@ -19,12 +19,16 @@ Ve a **[Releases](../../releases/latest)** y descarga el archivo de tu sistema:
 
 | Sistema | Archivo |
 |---|---|
-| Windows 10/11 | `Tandem_x.y.z_x64-setup.exe` (recomendado) o `.msi` |
+| Windows 10/11 | `Tandem_x.y.z_x64-setup.exe` (recomendado: se instala sin administrador y se actualiza sola) o `.msi` |
 | macOS con Apple Silicon (M1 o posterior) | `Tandem_x.y.z_aarch64.dmg` |
 | macOS con Intel | `Tandem_x.y.z_x64.dmg` |
 | Ubuntu / Debian | `.deb` |
 | Fedora / RHEL | `.rpm` |
 | Cualquier Linux | `.AppImage` |
+
+## Actualizaciones
+
+Tándem avisa cuando hay una versión nueva y se actualiza desde la propia app con **Actualizar y reiniciar** (también en **Ajustes → Acerca de → Buscar actualizaciones**). Cada actualización va firmada y Tándem verifica la firma antes de instalarla. En Windows esto aplica al instalador `.exe`; si tienes el `.msi`, desinstálalo e instala el `.exe` una vez. La versión de la Microsoft Store se actualiza desde la Store.
 
 ## Antes de usarla
 
